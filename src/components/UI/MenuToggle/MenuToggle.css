@@ -1,8 +1,9 @@
 .MenuToggle {
-    padding: 8px;
     height: 100%;
+    width: 40px;
+    padding: 10px 0;
     box-sizing: border-box;
-    border-radius: 5px;
+    align-items: center;
 }
 
 .MenuToggle img {

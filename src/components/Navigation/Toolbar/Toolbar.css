@@ -22,7 +22,7 @@
 }
 
 .MenuToggle {
-    height: 80%;
+    height: 100%;
 }
 
 @media (min-width: 500px) {
@@ -31,7 +31,7 @@
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 499px) {
     .DesktopOnly {
         display: none;
     }

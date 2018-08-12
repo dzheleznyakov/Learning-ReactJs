@@ -30,3 +30,8 @@
     height: 11%;
     margin-bottom: 32px;
 }
+
+.NavigationItems {
+    display: flex;
+    flex-flow: column;
+}

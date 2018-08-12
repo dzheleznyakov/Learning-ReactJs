@@ -14,12 +14,12 @@ const toolbar = (props) => {
             <div className={menuToggleClasses}>
                 <MenuToggle toggled={props.toggleSideDrawer} />
             </div>
-            <div className={classes.Logo}>
-                <Logo />
-            </div>
             <nav className={classes.DesktopOnly}>
                 <NavigationItems />
             </nav>
+            <div className={classes.Logo}>
+                <Logo />
+            </div>
         </header>
     )
 };
