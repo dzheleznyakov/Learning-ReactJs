@@ -2,13 +2,26 @@ import React from 'react';
 
 import classes from './Toolbar.css';
 import Logo from '../../Logo/Logo';
+import NavigationItems from '../NavigationItems/NavigationItems';
+import MenuToggle from '../../UI/MenuToggle/MenuToggle';
 
-const toolbar = (props) => (
-    <header className={classes.Toolbar}>
-        <div>MENU</div>
-        <Logo />
-        <nav>...</nav>
-    </header>
-);
+const toolbar = (props) => {
+    const menuToggleClasses = [classes.MenuToggle, classes.MobileOnly]
+        .join(' ');
+
+    return (
+        <header className={classes.Toolbar}>
+            <div className={menuToggleClasses}>
+                <MenuToggle toggled={props.toggleSideDrawer} />
+            </div>
+            <div className={classes.Logo}>
+                <Logo />
+            </div>
+            <nav className={classes.DesktopOnly}>
+                <NavigationItems />
+            </nav>
+        </header>
+    )
+};
 
 export default toolbar;
