@@ -16,6 +16,13 @@
     outline: none;
 }
 
+@media (max-height: 499px) {
+    .BuildControl button {
+        padding: 4px;
+        margin: 0 4px;
+    }
+}
+
 .BuildControl button:disabled {
     background-color: #AC9980;
     border: 1px solid #7E7365;
@@ -33,6 +40,12 @@
     padding: 10px;
     font-weight: bold;
     width: 80px;
+}
+
+@media (max-height: 499px) {
+    .Label {
+        padding: 6px;
+    }
 }
 
 .BuildControl .Less {  

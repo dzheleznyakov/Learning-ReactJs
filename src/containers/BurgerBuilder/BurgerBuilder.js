@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import classes from './BurgerBuilder.css';
+
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 import Burger from '../../components/Burger/Burger';
 import Modal from '../../components/UI/Modal/Modal';
@@ -102,13 +104,15 @@ class BurgerBuilder extends Component {
                         purchaseCancelled={this.purchaseCancelHandler}
                         purchaseContinued={this.purchaseContinueHandler} />
                 </Modal>
-                <Burger ingredients={this.state.ingredients} />
-                <IngredientControlContext.Provider value={this.controlContext}>
-                    <BuildControls 
-                    price={this.state.totalPrice}
-                    purchasable={this.state.purchasable}
-                    ordered={this.purchaseHandler} />
-                </IngredientControlContext.Provider>
+                <div className={classes.BurgerBuilderLayout}>
+                    <Burger ingredients={this.state.ingredients} />
+                    <IngredientControlContext.Provider value={this.controlContext}>
+                        <BuildControls 
+                        price={this.state.totalPrice}
+                        purchasable={this.state.purchasable}
+                        ordered={this.purchaseHandler} />
+                    </IngredientControlContext.Provider>
+                </div>
             </React.Fragment>
         );
     }

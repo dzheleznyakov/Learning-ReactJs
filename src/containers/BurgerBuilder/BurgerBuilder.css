@@ -1,0 +1,11 @@
+.BurgerBuilderLayout {
+    display: flex;
+    flex-flow: column;
+}
+
+@media (max-height: 499px) {
+    .BurgerBuilderLayout {
+        flex-flow: row;
+        height: 80%;
+    }
+}
