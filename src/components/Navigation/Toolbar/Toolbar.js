@@ -15,7 +15,7 @@ const toolbar = (props) => {
                 <MenuToggle toggled={props.toggleSideDrawer} />
             </div>
             <nav className={classes.DesktopOnly}>
-                <NavigationItems />
+                <NavigationItems isAuthenticated={props.isAuth} />
             </nav>
             <div className={classes.Logo}>
                 <Logo />
