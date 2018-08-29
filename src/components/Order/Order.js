@@ -3,7 +3,6 @@ import React from 'react';
 import classes from './Order.css';
 
 const order = (props) => {
-    console.log(props);
     const ingredientsOutput = Object.keys(props.ingredients)
         .map(ingredientName => {
             return { 

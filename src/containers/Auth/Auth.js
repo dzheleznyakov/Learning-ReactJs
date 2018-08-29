@@ -8,6 +8,7 @@ import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import * as actions from '../../store/actions/index';
+import { updateObject, checkValidity } from '../../shared/utility';
 
 class Auth extends Component {
     getOrderFormElement = (elementType, type, placeholder, ...rules) => {
@@ -46,46 +47,14 @@ class Auth extends Component {
         }
     }
 
-    checkValidity = (value, rules) => {
-        if (!rules) {
-            return true;
-        }
-        let isValid = true;
-        if (rules.required) {
-            isValid = isValid && value.trim() !== '';
-        }
-        if (rules.minLength) {
-            isValid = isValid && value.length >= rules.minLength;
-        }
-        if (rules.maxLength) {
-            isValid = isValid && value.length <= rules.maxLength;
-        }
-        if (rules.matches) {
-            isValid = isValid && rules.matches.test(value);
-        }
-        if (rules.isEmail) {
-            const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-            isValid = isValid && pattern.test(value);
-        }
-        if (rules.isNumeric) {
-            const pattern = /^\d+$/;
-            isValid = pattern.test(value) && isValid
-        }
-        return isValid;
-    };
-
     inputChangedHandler = (event, controlName)  => {
-        const updatedControls = {
-            ...this.state.controls,
-            [controlName]: {
-                ...this.state.controls[controlName],
+        const updatedControls = updateObject(this.state.controls, {
+            [controlName]: updateObject(this.state.controls[controlName], {
                 value: event.target.value,
-                valid: this.checkValidity(
-                    event.target.value,
-                    this.state.controls[controlName].validation),
+                valid: checkValidity(event.target.value, this.state.controls[controlName].validation),
                 touched: true
-            }
-        };
+            })
+        });
         this.setState({ controls: updatedControls });
     };
 
