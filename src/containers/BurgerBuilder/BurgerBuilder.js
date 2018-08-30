@@ -14,7 +14,7 @@ import * as actions from '../../store/actions/index';
 
 export const IngredientControlContext = React.createContext();
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
     state = {
         purchasing: false,
     };
