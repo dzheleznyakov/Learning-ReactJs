@@ -38,7 +38,7 @@ class Auth extends Component {
             password: this.getOrderFormElement('input', 'password', 'Password',
                 { minLength: 6 })
         },
-        isSignup: true
+        isSignup: false
     };
 
     componentDidMount() {
