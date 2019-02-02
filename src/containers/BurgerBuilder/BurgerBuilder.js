@@ -71,6 +71,7 @@ export class BurgerBuilder extends Component {
             orderSummary = <OrderSummary 
                 ingredients={this.props.ings}
                 price={this.props.price}
+                discounts={this.props.discounts}
                 purchaseCancelled={this.purchaseCancelHandler}
                 purchaseContinued={this.purchaseContinueHandler} 
             />;
@@ -111,7 +112,8 @@ const mapStateToProps = state => {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
         error: state.burgerBuilder.error,
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        discounts: state.auth.discounts,
     };
 };
 

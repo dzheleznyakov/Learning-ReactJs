@@ -4,6 +4,8 @@ import { updateObject } from '../../shared/utility';
 const initialState = {
     token: null,
     userId: null,
+    userEmail: '',
+    discounts: null,
     error: null,
     loading: false,
     authRedirectPath: '/'
@@ -14,6 +16,7 @@ const authStart = (state) => updateObject(state, { error: null, loading: true});
 const authSuccess = (state, action) => updateObject(state, {
     token: action.idToken,
     userId: action.userId,
+    userEmail: action.userEmail,
     error: null,
     loading: false
 });
@@ -23,9 +26,16 @@ const authFail = (state, action) => updateObject(state, {
     loading: false
 });
 
-const authLogout = (state) => updateObject(state, { token: null, userId: null });
+const authLogout = (state) => updateObject(state, { 
+    token: null, 
+    userId: null, 
+    userEmail: '',
+    discounts: null,
+});
 
 const setAuthRedirectPath = (state, action) => updateObject(state, { authRedirectPath: action.path });
+
+const setDiscounts = (state, action) => updateObject(state, { discounts: action.discounts });
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -34,6 +44,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.AUTH_FAIL: return authFail(state, action);
         case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
         case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state, action);
+        case actionTypes.SET_DISCOUNTS: return setDiscounts(state, action);
         default: return state;
     }
 };

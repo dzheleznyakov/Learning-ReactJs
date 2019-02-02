@@ -12,11 +12,11 @@ import * as actions from '../../../store/actions/index';
 import { updateObject, checkValidity } from '../../../shared/utility';
 
 class ContactData extends Component {
-    getOrderFormElement = (elementType, type, placeholder, ...rules) => {
+    getOrderFormElement = (elementType, type, placeholder, value, ...rules) => {
         const formElement = { 
             elementType, 
             elementConfig: { type, placeholder },
-            value: '',
+            value: value || '',
             validation: {
                 required: true
             },
@@ -32,28 +32,31 @@ class ContactData extends Component {
         return formElement;
     };
 
-    state = {
-        orderForm: {
-            name: this.getOrderFormElement('input', 'text', 'Your Name'),
-            street: this.getOrderFormElement('input', 'text', 'Your Street'),
-            zipCode: this.getOrderFormElement('input', 'text', 'ZIP CODE', 
-                { minLength: 5 }, { maxLength: 5 }),
-            country: this.getOrderFormElement('input', 'text', 'Country'),
-            email: this.getOrderFormElement('input', 'email', 'Your E-Mail',
-                { matches: /\w+@\w+[\\.\w+]+/ }),
-            deliveryMethod: {
-                elementType: 'select',
-                elementConfig: {
-                    options: [
-                        { value: 'fastest', displayValue: 'Fastest'},
-                        { value: 'cheapest', displayValue: 'Cheapest'}
-                    ]
-                },
-                value: 'fastest',
-                valid: true
-            }
-        },
-        formIsValid: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            orderForm: {
+                name: this.getOrderFormElement('input', 'text', 'Your Name'),
+                street: this.getOrderFormElement('input', 'text', 'Your Street'),
+                zipCode: this.getOrderFormElement('input', 'text', 'ZIP CODE', null, 
+                    { minLength: 5 }, { maxLength: 5 }),
+                country: this.getOrderFormElement('input', 'text', 'Country'),
+                email: this.getOrderFormElement('input', 'email', 'Your E-Mail', props.userEmail,
+                    { matches: /\w+@\w+[\\.\w+]+/ }),
+                deliveryMethod: {
+                    elementType: 'select',
+                    elementConfig: {
+                        options: [
+                            { value: 'fastest', displayValue: 'Fastest'},
+                            { value: 'cheapest', displayValue: 'Cheapest'}
+                        ]
+                    },
+                    value: 'fastest',
+                    valid: true
+                }
+            },
+            formIsValid: false
+        }
     }
 
     orderHandler = (event) => {
@@ -127,7 +130,8 @@ const stateToProps = state => {
         price: state.burgerBuilder.totalPrice,
         loading: state.order.loading,
         token: state.auth.token,
-        userId: state.auth.userId
+        userId: state.auth.userId,
+        userEmail: state.auth.userEmail,
     }
 };
 

@@ -6,11 +6,12 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (idToken, userId) => {
+export const authSuccess = (idToken, userId, userEmail) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         idToken,
-        userId
+        userId,
+        userEmail,
     };
 };
 
@@ -60,4 +61,19 @@ export const authCheckState = () => {
     return {
         type: actionTypes.AUTH_CHECK_INITIAL_STATE
     };
+};
+
+export const checkUserDiscount = (token, userId) => {
+    return {
+        type: actionTypes.CHECK_USER_DISCOUNT,
+        userId,
+        token,
+    };
+};
+
+export const setDiscounts = (discounts) => {
+    return {
+        type: actionTypes.SET_DISCOUNTS,
+        discounts,
+    }
 };

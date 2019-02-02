@@ -5,7 +5,8 @@ import {
     logoutSaga, 
     checkAuthTimeoutSaga, 
     authUserSaga,
-    authCheckStateSaga
+    authCheckStateSaga,
+    checkUserDiscountSaga
 } from './auth';
 import { initIngredientsSaga } from './burgerBuilder';
 import { purchaseBurgerSaga, fetchOrdersSaga } from './order';
@@ -15,7 +16,8 @@ export function* watchAuth() {
         takeEvery(actionTypes.AUTH_INITIATE_LOGOUT, logoutSaga),
         takeEvery(actionTypes.AUTH_CHECK_TIMEOUT, checkAuthTimeoutSaga),
         takeEvery(actionTypes.AUTH_USER, authUserSaga),
-        takeEvery(actionTypes.AUTH_CHECK_INITIAL_STATE, authCheckStateSaga)
+        takeEvery(actionTypes.AUTH_CHECK_INITIAL_STATE, authCheckStateSaga),
+        takeEvery(actionTypes.CHECK_USER_DISCOUNT, checkUserDiscountSaga),
     ]);
 }
 
