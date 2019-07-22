@@ -1,39 +1,35 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
 import classes from './Layout.css';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 
-class Layout extends Component {
-    state = {
-        showSideDrawer: false
-    };
+const layout = props => {
+  const [showSideDrawer, setShowSideDrawer] = useState(false);
 
-    sideDrawerClosedHandler = () => {
-        this.setState({ showSideDrawer: false });
-    };
+  const sideDrawerClosedHandler = () => {
+      setShowSideDrawer(false);
+  };
 
-    sideDrawerToggleHandler = () => {
-        this.setState(prevState => ({showSideDrawer: !prevState.showSideDrawer}));
-    };
-
-    render() {
-        return (
-            <React.Fragment>
-                <Toolbar 
-                    isAuth={this.props.isAuthenticated}
-                    toggleSideDrawer={this.sideDrawerToggleHandler}/>
-                <SideDrawer 
-                    isAuth={this.props.isAuthenticated}
-                    open={this.state.showSideDrawer} 
-                    closed={this.sideDrawerClosedHandler} />
-                <main className={classes.Content}>
-                    {this.props.children}
-                </main>
-            </React.Fragment>
-        );
-    }
+  const sideDrawerToggleHandler = () => {
+      setShowSideDrawer(!showSideDrawer);
+  };
+    
+  return (
+    <React.Fragment>
+      <Toolbar 
+        isAuth={props.isAuthenticated}
+        toggleSideDrawer={sideDrawerToggleHandler}/>
+      <SideDrawer 
+        isAuth={props.isAuthenticated}
+        open={showSideDrawer} 
+        closed={sideDrawerClosedHandler} />
+      <main className={classes.Content}>
+        {props.children}
+      </main>
+    </React.Fragment>
+  );
 }
 
 const mapStateToConst = state => {
@@ -42,4 +38,4 @@ const mapStateToConst = state => {
     };
 };
 
-export default connect(mapStateToConst)(Layout);
+export default connect(mapStateToConst)(layout);
